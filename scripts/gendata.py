@@ -13,10 +13,12 @@ import time
 batchappendsize=1000
 sep=","
 recorddef={}
-directory=""
-records=None
 
 def main(argv):
+   directory=None
+   records=None
+   inputfile=None
+   processes=None
    try:
       opts, args = getopt.getopt(argv,"hi:r:p:d:",["ifile=","records=","processes=","odirectory="])
    except getopt.GetoptError:
@@ -34,10 +36,16 @@ def main(argv):
          processes = arg
       elif opt in ("-d", "--odirectory"):
          directory = arg
-   defcols(inputfile)
    if processes is None:
 	processes = 1
 
+   if (inputfile is None) or (records is None) or (directory is None):
+	print "One or more options needed"
+	print "Usage: -i <inputfile> -r <records per process> -p <number or processes> -d <output directory>"
+	sys.exit(1)
+
+
+   defcols(inputfile)
    manager = mp.Manager()
    q = manager.Queue()    
    pool = mp.Pool(mp.cpu_count() + 2)

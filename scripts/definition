@@ -1,3 +1,5 @@
-col1 date	"%m/%d/%Y","06/01/2012","06/30/2013"
-col2	int	10000,11000
-col3	string	TRUE,FALSE
+somedate	"%m/%d/%Y","06/01/2012","06/30/2013"
+someid	int	1,13
+somecol	string	TRUE,FALSE
+somecol2	string	yellow,red,green
+somecol3	int	0,10000000
