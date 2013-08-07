@@ -47,3 +47,10 @@ def mybool():
 def mystring(listOfStrings):
 	from random import choice
 	return choice(listOfStrings)
+
+def dependent(dep_on,funct,values):
+	if (funct == "map"):
+		import json
+		print values
+		obj = json.loads(str(values))
+		return obj[dep_on]

@@ -93,9 +93,10 @@ def generatedata(tt,records,q):
 		recordLine=None
 		while (i < totalcols):	
 			if recordLine is None:
-				recordLine = str(makecall(recorddef[i]["funct"],recorddef[i]["values"]))
+				recordLine = str(makecall(recorddef[i]["funct"],recorddef[i]["values"], None))
 			else:
-				recordLine = recordLine + sep + str(makecall(recorddef[i]["funct"],recorddef[i]["values"]))
+				dep_on = recordLine.split(sep)[-1]
+				recordLine = recordLine + sep + str(makecall(recorddef[i]["funct"],recorddef[i]["values"],dep_on))
 			i = i+1
 		if (batchappend == totalrecords):
 			batchappenddata = batchappenddata + "\n" + recordLine + "\n"
@@ -116,9 +117,9 @@ def defcols(file):
          recorddef[i]={"funct":None, "values":None} 
 	 localcols=line.split("\t")
 	 recorddef[i]["funct"]=localcols[1]
-	 recorddef[i]["values"]=localcols[len(localcols)-1].strip("\n").split(",")
+	 recorddef[i]["values"]=localcols[len(localcols)-1].strip("\n").split("-")
 	 i = i + 1
-def makecall(colfunc,values):
+def makecall(colfunc,values,dep_on):
 	if colfunc == "date":
 		length=len(values)
 		format=None
@@ -149,6 +150,9 @@ def makecall(colfunc,values):
 	elif colfunc == "string":
 		
 		return functions.mystring(values)
+	elif colfunc == "dependent":
+		return functions.dependent(dep_on, values[0], values[1])			
+	
 
 if __name__ == "__main__":
    main(sys.argv[1:])

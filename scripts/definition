@@ -1,5 +1,6 @@
-somedate	"%m/%d/%Y","06/01/2012","06/30/2013"
-someid	int	1,13
-somecol	string	TRUE,FALSE
-somecol2	string	yellow,red,green
-somecol3	int	0,10000000
+somedate	date	"%m/%d/%Y"-"06/01/2012"-"06/30/2013"
+someid	int	1-13
+somecol	string	TRUE-FALSE
+somecol2	string	yellow-red-green
+somecol4	dependent	map-{"yellow":"1", "red":"2", "green":"3"}
+somecol3	int	0-10000000
