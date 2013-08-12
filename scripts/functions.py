@@ -41,6 +41,14 @@ def myint(start=None,end=None):
 
 	return random.randint(start,end)
 
+def myfloat(start=None, end=None):
+	if start is None:
+		start = 0.0
+	if end is None:
+		end = 10.0
+
+	return round(random.uniform(start,end),2)
+
 def mybool():
 	return bool(random.getrandbits(1))
 

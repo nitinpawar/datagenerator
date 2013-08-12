@@ -160,7 +160,10 @@ def makecall(colfunc,values,dep_on):
 		return functions.mystring(values)
 	elif colfunc == "dependent":
 		return functions.dependent(dep_on, values[0], values[1])			
-	
+	elif colfunc == "float":
+		start=float(values[0])
+		end=float(values[1])	
+		return functions.myfloat(start,end)
 
 if __name__ == "__main__":
    main(sys.argv[1:])
