@@ -1,4 +1,5 @@
 somedate	date	"%m/%d/%Y"-"06/01/2012"-"06/30/2013"
+somedate	dependent	date-{"todo":"add_days", "by":1, "format":"%m/%d/%Y"}
 someid	int	1-13
 somecol	string	TRUE-FALSE
 somecol2	string	yellow-red-green

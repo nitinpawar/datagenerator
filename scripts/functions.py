@@ -1,7 +1,7 @@
 import random
 import time
+import datetime, sys
 def mydate(format=None,start=None,end=None):
-	import datetime, sys
 	if format is None:
 		format="%m/%d/%Y"
 	if start is None:
@@ -10,7 +10,7 @@ def mydate(format=None,start=None,end=None):
 		now = datetime.datetime.now()
 		end=now.strftime("%m/%d/%Y")
 	
-	return randomDate(start, end, format, random.random())	
+	return randomDate(start, end, format, random.random()).strip("\"")	
 
 def strTimeProp(start, end, format, prop):
     """Get a time at a proportion of a range of two formatted times.
@@ -49,8 +49,16 @@ def mystring(listOfStrings):
 	return choice(listOfStrings)
 
 def dependent(dep_on,funct,values):
+	import json
 	if (funct == "map"):
-		import json
-		print values
 		obj = json.loads(str(values))
 		return obj[dep_on]
+	if (funct == "date"):
+		obj = json.loads(str(values))
+		todo = obj["todo"]
+		toby=int(obj["by"])
+		format = obj["format"]
+		old_date=datetime.datetime.strptime(dep_on.strip("\""), format)
+		if (todo == "add_days"):
+			new_date=old_date + datetime.timedelta(days=toby)
+			return new_date.strftime(format)

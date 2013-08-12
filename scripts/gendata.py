@@ -75,8 +75,9 @@ def writetofile(directory,q):
 #		print m
 		if m == "KILL":
 			print "Done"
-		fo.write(m)
-		fo.flush()
+		else:
+			fo.write(m)
+			fo.flush()
 	fo.close()
 
 
