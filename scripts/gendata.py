@@ -93,10 +93,16 @@ def generatedata(tt,records,q):
 		currentrecord = currentrecord + 1
 		recordLine=None
 		while (i < totalcols):	
+			funct = recorddef[i]["funct"]
+			values= recorddef[i]["values"]
+			dep_on = None
+			if (funct == "dependent"):
+				depcol = recorddef[i]["depcol"]
+				dep_on = recordLine.split(sep)[int(depcol)]
+				
 			if recordLine is None:
-				recordLine = str(makecall(recorddef[i]["funct"],recorddef[i]["values"], None))
+				recordLine = str(makecall(recorddef[i]["funct"],recorddef[i]["values"], dep_on))
 			else:
-				dep_on = recordLine.split(sep)[-1]
 				recordLine = recordLine + sep + str(makecall(recorddef[i]["funct"],recorddef[i]["values"],dep_on))
 			i = i+1
 		if (batchappend == totalrecords):
@@ -115,10 +121,12 @@ def defcols(file):
    with open(file) as f:
       i=0
       for line in f:
-         recorddef[i]={"funct":None, "values":None} 
+         recorddef[i]={"funct":None, "values":None, "depcol":None} 
 	 localcols=line.split("\t")
 	 recorddef[i]["funct"]=localcols[1]
-	 recorddef[i]["values"]=localcols[len(localcols)-1].strip("\n").split("-")
+	 recorddef[i]["values"]=localcols[2].strip("\n").split("-")
+	 if (len(localcols) == 4):
+		recorddef[i]["depcol"] = localcols[3].strip("\n")
 	 i = i + 1
 def makecall(colfunc,values,dep_on):
 	if colfunc == "date":
@@ -149,7 +157,6 @@ def makecall(colfunc,values,dep_on):
 	elif colfunc == "bool":
 		return function.mybool()			
 	elif colfunc == "string":
-		
 		return functions.mystring(values)
 	elif colfunc == "dependent":
 		return functions.dependent(dep_on, values[0], values[1])			

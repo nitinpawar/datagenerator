@@ -1,7 +1,9 @@
 somedate	date	"%m/%d/%Y"-"06/01/2012"-"06/30/2013"
-somedate	dependent	date-{"todo":"add_days", "by":1, "format":"%m/%d/%Y"}
+somedate	dependent	date-{"todo":"add_days", "by":1, "format":"%m/%d/%Y"}	0
+somemonth	dependent	date-{"todo":"getMonth", "format":"%m/%d/%Y"}	0
+someYear	dependent	date-{"todo":"getYear", "format":"%m/%d/%Y"}	0
 someid	int	1-13
 somecol	string	TRUE-FALSE
 somecol2	string	yellow-red-green
-somecol4	dependent	map-{"yellow":"1", "red":"2", "green":"3"}
+somecol4	dependent	map-{"yellow":"1", "red":"2", "green":"3"}	6
 somecol3	int	0-10000000

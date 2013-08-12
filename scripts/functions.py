@@ -56,9 +56,13 @@ def dependent(dep_on,funct,values):
 	if (funct == "date"):
 		obj = json.loads(str(values))
 		todo = obj["todo"]
-		toby=int(obj["by"])
 		format = obj["format"]
 		old_date=datetime.datetime.strptime(dep_on.strip("\""), format)
 		if (todo == "add_days"):
+			toby=int(obj["by"])
 			new_date=old_date + datetime.timedelta(days=toby)
 			return new_date.strftime(format)
+		elif (todo == "getMonth"):
+			return old_date.month
+		elif (todo == "getYear"):
+			return old_date.year
