@@ -23,5 +23,17 @@ Its a simple tab(\t) separated file where first column is column name.
 Second column is datatype for the column and third column is data related 
 information like format and range etc 
 
-Currently it supports only three datatypes, feel free to add any more in 
-functions.py and then invoke it via makecall() in main file. 
+Currently it supports only date, int and string datatypes, feel free to add any more in 
+functions.py and then invoke it via makecall() in main file
+
+A special function "dependent" is added which generates 
+dependent values based on some other column. 
+Format for dependent function is 
+columnname<tab>dependent<tab>function-{values for functions and subfunction}<tab><column on which dependent>
+Column on which dependent is the # of column starting first column ranked 0
+
+date function has three subfunctions
+	addDays
+	getMonth
+	getYear
+map function basically maps the keys with values
