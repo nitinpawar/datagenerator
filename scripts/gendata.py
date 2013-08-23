@@ -124,7 +124,7 @@ def defcols(file):
          recorddef[i]={"funct":None, "values":None, "depcol":None} 
 	 localcols=line.split("\t")
 	 recorddef[i]["funct"]=localcols[1]
-	 recorddef[i]["values"]=localcols[2].strip("\n").split("-")
+	 recorddef[i]["values"]=localcols[2].strip("\n").split("|")
 	 if (len(localcols) == 4):
 		recorddef[i]["depcol"] = localcols[3].strip("\n")
 	 i = i + 1
@@ -164,6 +164,8 @@ def makecall(colfunc,values,dep_on):
 		start=float(values[0])
 		end=float(values[1])	
 		return functions.myfloat(start,end)
+	elif colfunc == "onedate":
+		return functions.myonedate(values[0],values[1],values[2],values[3])
 
 if __name__ == "__main__":
    main(sys.argv[1:])

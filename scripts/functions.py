@@ -55,6 +55,18 @@ def mybool():
 def mystring(listOfStrings):
 	from random import choice
 	return choice(listOfStrings)
+def myonedate(myDay, months, years,format):
+	startMonth=months.split("-")[0]
+	endMonth=months.split("-")[1]
+	startYear=years.split("-")[0]
+	endYear=years.split("-")[1]
+	
+	myMonth=myint(int(startMonth), int(endMonth))
+	myYear=myint(int(startYear), int(endYear))
+	import datetime
+	mydate=datetime.date(myYear, myMonth, int(myDay))
+	return mydate.strftime(format).strip("\"")
+	
 
 def dependent(dep_on,funct,values):
 	import json
